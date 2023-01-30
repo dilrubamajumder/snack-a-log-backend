@@ -10,6 +10,8 @@ const {
 
 const { checkBoolean } = require("../validations/checkSnacks.js");
 
+const { nameCap } = require("../Helpers/helper");
+
 // INDEX
 snacks.get("/", async (req, res) => {
   const allSnacks = await getAllSnacks();
@@ -35,7 +37,9 @@ snacks.get("/:id", async (req, res) => {
 // CREATE
 snacks.post("/", checkBoolean, async (req, res) => {
   try {
-    const newSnack = await createSnack(req.body);
+    const cap = nameCap(req.body);
+    const newSnack = await createSnack(cap);
+
     res.status(200).json(newSnack);
   } catch (error) {
     res.status(500).json({ error: "error" });
