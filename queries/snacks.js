@@ -1,5 +1,7 @@
 const db = require("../db/dbConfig.js");
 
+const { nameCap } = require("../Helpers/helper")
+
 //INDEX
 const getAllSnacks = async () => {
     try {
@@ -34,6 +36,7 @@ const getAllSnacks = async () => {
           snack.image,
         ]
       );
+     
       return newSnack;
     } catch (error) {
       return error;
