@@ -8,7 +8,7 @@ const {
   updateSnack,
 } = require("../queries/snacks");
 
-const { checkBoolean } = require("../validations/checkSnacks.js");
+const { validateURL } = require("../validations/checkSnacks.js");
 
 const { nameCap } = require("../Helpers/helper");
 
@@ -35,7 +35,7 @@ snacks.get("/:id", async (req, res) => {
 });
 
 // CREATE
-snacks.post("/", checkBoolean, async (req, res) => {
+snacks.post("/", async (req, res) => {
   try {
     const cap = nameCap(req.body);
     const newSnack = await createSnack(cap);
@@ -62,10 +62,11 @@ snacks.delete("/:id", async (req, res) => {
 });
 
 // UPDATE
-snacks.put("/:id", checkBoolean, async (req, res) => {
+snacks.put("/:id", validateURL, async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedSnack = await updateSnack(id, req.body);
+    const nutrition = nameCap(req.body)
+    const updatedSnack = await updateSnack(id, nutrition);
 
     if (updatedSnack.id) {
       res.status(200).json(updatedSnack);
