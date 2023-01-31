@@ -1,13 +1,14 @@
-const checkBoolean = (req, res, next) => {
+const validateURL = (req, res, next) => {
     if (
-      req.body.is_healthy === true ||
-      req.body.is_healthy === false ||
-      req.body.is_healthy === undefined
+      req.body.image.substring(0, 7) === "http://" ||
+      req.body.image.substring(0, 8) === "https://"
     ) {
-      next();
+      return next();
     } else {
-      res.status(400).json({ error: "is_healthy should be true or false" });
+      res
+        .status(400)
+        .json({ error: "You forgot to start your url with http:// or https://" });
     }
   };
-  
-  module.exports = {checkBoolean}
+
+  module.exports = { validateURL }
