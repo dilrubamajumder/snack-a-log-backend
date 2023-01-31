@@ -26,6 +26,5 @@ const nameCap = (snack) => {
   return { ...snack, name: processedName };
 };
 
-console.log(nameCap(obj));
 
 module.exports = { nameCap, healthCheck };
