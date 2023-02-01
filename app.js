@@ -15,7 +15,7 @@ app.use("/snacks", snacksController);
 
 // ROUTES
 app.get("/", (req, res) => {
-    res.send("Welcome to Snack-A-Log App");
+    res.send("Welcome to Snack-A-Log App, use `/snacks` to get snacks data");
   });
   
   app.get("*", (req, res) => {
